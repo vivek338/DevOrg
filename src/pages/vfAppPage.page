@@ -1,0 +1,64 @@
+<apex:page controller="vfAppPageController" >  
+    <apex:form >        
+    <script type="text/javascript">    
+    function hidebaseObject(){
+        alert('Entered Javascript') ;
+        console.log('inside mehtod');
+        //document.getElementById('baseObjectForm').style.display = 'none';
+        // document.getElementById('relatedObjectForm').style.display = 'inline';
+         CallApexMethod() ;
+        
+     }
+    </script>
+        <apex:pageBlock id="pb">
+        <apex:actionFunction name="CallApexMethod" action="{!ShowFields}" onComplete="alert('After apex method') ;" reRender="UnitApprovalBlock"/>
+<table border="1" align="center">
+ 
+    <tr>
+       <td>
+ 
+        </td>
+        <apex:repeat value="{!lMonths}" id="repeat1" var="item">
+        <td>
+            <center><b><apex:outputText value="{!item}" id="theValue"/></b></center>
+        </td>
+            
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!lBuses}" id="repeat2" var="pitem">
+    <tr>
+        <td><center><b><apex:outputField value="{!pitem.name}" id="theValue"/></b></center>        
+        <apex:commandButton value="Click Me" action="{!ShowFields}" /></td>
+        </tr>        
+    <!--apex:repeat value="{!lBuses}" id="repeat21" var="pitem" rendered="{!RenderSection}"-->
+        <apex:outputPanel id="op1" rendered="{!RenderSection}">
+    <tr>
+        <td><center><b><apex:inputText value="{!pitem.Type__c}" id="theValue1"/></b></center></td>
+        <apex:outputPanel id="op2" >
+
+           <apex:repeat value="{!lBuses}" id="repeat31" var="item31">
+            <td>
+       
+            <center><b><apex:inputText value="{!item31.Desitination__c}" id="theValue12" /></b></center>
+          
+        </td>
+            </apex:repeat>
+            
+         
+           
+        <td>
+            <apex:commandLink value="Add Row" action="{!addRow}" reRender="op2"/>
+            </td>
+            </apex:outputPanel>
+            
+     </tr>
+        
+            </apex:outputPanel>
+      <!--/apex:repeat-->
+      <!--/apex:pageBlock-->
+      </apex:repeat>     
+ 
+</table>          
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>

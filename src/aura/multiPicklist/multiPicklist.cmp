@@ -1,0 +1,23 @@
+<aura:component controller="FetchUserFolders">
+    <!--init handler event call "initialize" function on component load
+        and fetch picklist values-->
+    <aura:handler name="init" value="{! this }" action="{! c.initialize }"/>
+    
+   <!--Declare Attributes-->  
+    <aura:attribute name="objInfo" type="account" default="{sobjectType : 'Account'}" />
+	<aura:attribute name="listFilesOptions" type="List" default="[]"/>
+    <aura:attribute name="selectedFilesItems" type="List" default="[]"/>
+  
+   <!-- lightning dualListbox component -->
+    <lightning:dualListbox aura:id="selectOptions"
+                           name="Files"
+                           label="Select Files" 
+                           sourceLabel="Available Files" 
+                           selectedLabel="Selected Files" 
+                           options="{! v.listFilesOptions }"
+                           value="{! v.selectedFilesItems }"
+                           onchange="{! c.handleChange }"/>
+    <br/>
+    
+    <lightning:button variant="brand" label="Selected Items" onclick="{!c.getSelectedItems }" />
+</aura:component>

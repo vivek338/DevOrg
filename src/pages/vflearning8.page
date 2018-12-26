@@ -1,0 +1,15 @@
+<apex:page >
+  <html>
+    <body>
+    
+    <h1>My First JavaScript</h1>
+    
+    <button type="button"
+    onclick="document.getElementById('demo').innerHTML = 'vivek'">
+    Click me to display Date and Time.</button>
+    
+    <p id="demo"></p>
+    
+    </body>
+  </html>
+</apex:page>

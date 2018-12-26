@@ -1,0 +1,134 @@
+<aura:component implements="force:appHostable" controller="FolderController" >
+    <aura:attribute name="reg" type="User_Folder__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <aura:attribute name="doc" type="String[]"/>	
+    <aura:attribute name="childAttribute" type="String"/> 
+    <aura:attribute name="selected" type="String[]" default="abc, def"/>
+    <aura:attribute name="newFolder" type="Folder__c" default="{ 'sobjectType': 'Folder__c', 
+                                                                                 'Name': '',
+                                                                               }"/>
+    <br/><br/>    
+    <aura:registerEvent name="folderEvent" type="c:folderReferesh"/>
+    <aura:method name="updateAcc" action="{!c.getAccount}" description="method for rendered list after add new account "/>
+   
+   <div style="margin:15px; align-items: center;">
+   <!--<button style="height:50px: width:100px;">
+   <img src="{!'/servlet/servlet.FileDownload?file=0150K000006UIJn'}"/><br/>
+            <img style="height:50px: width:100px;"	src="{!'/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&amp;versionId=0680K000008mh92QAA'}"/>
+
+       </button> 
+            <img style="height:50px: width:100px;"	src="{!'/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&amp;versionId=0680K000008mh92QAA'}">
+                <button style="height:50px: width:100px;">abcd</button>  
+       </img>-->
+    
+      <!-- 	<lightning:icon iconName="standard:folder" size="small" title="abc" alternativeText="Indicates approval" variant="error" />-->    
+       <lightning:button variant="brand" label="New Folder" onclick="{!c.openModel}" iconName="utility:new" />
+     <!--   <lightning:button variant="brand" label="Edit" onclick="{! c.openModel }" iconName="utility:edit"/>
+        <lightning:button variant="brand" label="Delete" onclick="confirm('are you sure');" iconName="utility:close"/>   -->
+       <!--<lightning:buttonIcon value="Delete" iconName="utility:close" variant="bare" onclick="{! c.handleClick }" alternativeText="Close window." />-->
+   </div>      
+   <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:if isTrue="{!v.isOpen}">
+    <!--//MOdal box-->
+    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+        <div class="slds-modal__container">
+          <!-- ###### MODAL BOX HEADER Part Start From Here ######-->
+          <div class="slds-modal__header">
+            <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModel}">
+            X
+            <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="header99" class="slds-text-heading--medium">Create a New Folder</h2>
+          </div>
+          <!--###### MODAL BOX BODY Part Start From Here ######-->
+          <div class="slds-modal__content slds-p-around--medium">
+              <form>
+                  <ui:inputText aura:id="FolderName" label="New Folder Name"
+                                class="slds-input"
+                                labelClass="slds-form-element__label"
+                                value="{!v.newFolder.Name}"
+                                required="true"/>                  
+              </form>
+         <!--   <lightning:input aura:id="field" label="Folder Name" placeholder="Enter Folder Name Here.." required="true" />                   
+              <ui:inputCheckbox label="is Generic ?  "/>-->
+          </div>
+          <!--###### MODAL BOX FOOTER Part Start From Here ######-->
+          <div class="slds-modal__footer">
+            <button class="slds-button slds-button--neutral" onclick="{!c.closeModel}" >Cancel</button>
+            <button class="slds-button slds-button--brand" onclick="{!c.likenClose}">Save</button>
+          </div>
+        </div>
+      </div>
+      <div class="slds-backdrop slds-backdrop--open"></div>
+      <!--###### MODAL BOX Part END Here ######-->
+        </aura:if>
+    <aura:attribute name="searchText" type="String" default=""/>
+	 <div class="slds-m-left_x-large ">
+        <div class="slds-form-element slds-lookup" data-select="single">
+            <div class="slds-form-element__control">
+                <div class="slds-input-has-icon slds-input-has-icon--right slds-col slds-size_1-of-3">              
+                <!--    <ui:inputText value="{!v.searchText}" class="slds-lookup__search-input slds-input" placeholder="Search" keyup="{!c.searchTextVal}"/>-->
+                </div>
+            </div>
+        </div>  
+    </div>
+    <c:TreeCmp parentObj="vivek338__Folder__c" parentObjNameField="Name" /> 
+    
+     <div class="slds-page-header slds-page-header_object-home">
+        <lightning:layout >
+            <lightning:layoutItem >
+                <lightning:icon iconName="standard:business_hours" />
+            </lightning:layoutItem>
+            <lightning:layoutItem class="slds-m-left_small">
+                <p class="slds-text-title_caps slds-line-height_reset">XXXX</p>
+                <h1 class="slds-page-header__title slds-p-right_x-small">Activities Dashboard</h1>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>        
+      <div class="slds-grid slds-wrap slds-grid_pull-padded">
+          <div class="slds-p-horizontal_small slds-size_1-of-1">
+            <lightning:tabset variant="scoped">
+                <lightning:tab label="PROSPECT STAGES (AVERAGES)" id="avg" >                   
+                    <lightning:datatable data="{! v.accAvg}" aura:id="accAvg"  
+                       columns="{! v.avgColumns}" 
+                       keyField="name"                       
+                       onsort="{! c.updateColumnSorting}"                                 
+                       sortedBy="name"
+                       sortedDirection="asc"
+                       defaultSortDirection="asc"
+                       hideCheckboxColumn="true"/>                           
+                </lightning:tab>
+        <lightning:tab label="SUSPECTS - NET NEW" id="new" >
+            <lightning:datatable data="{! v.accNew}" aura:id="accNew"  
+                       columns="{! v.stColumns}" 
+                       keyField="account"
+                       onsort="{! c.updateColumnSorting}"               
+                       sortedBy="owner"
+                       sortedDirection="asc"
+                       defaultSortDirection="asc"
+                       hideCheckboxColumn="true"/>    
+        </lightning:tab>
+        <lightning:tab label="SUSPECTS - WORKING" id="wor" >
+            <lightning:datatable data="{! v.accWor}" aura:id="accWor"  
+                       columns="{! v.stColumns}" 
+                       keyField="account"
+                       onsort="{! c.updateColumnSorting}"               
+                       sortedBy="owner"
+                       sortedDirection="asc"
+                       defaultSortDirection="asc"
+                       hideCheckboxColumn="true"/>
+        </lightning:tab>
+        <lightning:tab label="PROSPECTS - MI SET (DISCOVERY)" id="dis" >
+            <lightning:datatable data="{! v.accDis}" aura:id="accDis"  
+                       columns="{! v.stColumns}" 
+                       keyField="account"
+                       onsort="{! c.updateColumnSorting}"               
+                       sortedBy="owner"
+                       sortedDirection="asc"
+                       defaultSortDirection="asc"
+                       hideCheckboxColumn="true"/>
+        </lightning:tab>
+    </lightning:tabset> 
+        </div>
+    </div>
+</aura:component>

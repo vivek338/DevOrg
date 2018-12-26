@@ -1,0 +1,14 @@
+<aura:component controller="FetchUserFolders">
+   <aura:attribute name="doc" type="ContentDocumentLink[]"/>	
+   <aura:attribute name="childAttribute" type="String"/> 
+    <br/> <br/>
+   {!v.childAttribute}   
+   <aura:handler name="change" value="{!v.childAttribute}" action="{!c.onChildAttributeChange}"/>
+    
+    <aura:iteration var="d" items="{!v.doc}" >
+    <p>{!d.ContentDocument.Title}</p>
+    </aura:iteration>
+    
+    
+    
+</aura:component>

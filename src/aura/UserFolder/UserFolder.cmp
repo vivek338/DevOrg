@@ -1,0 +1,61 @@
+<aura:component implements="force:appHostable" controller="FetchUserFolders" >
+    <aura:attribute name="reg" type="User_Folder__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <aura:attribute name="doc" type="String[]"/>	
+    <aura:attribute name="childAttribute" type="String"/> 
+    <aura:attribute name="selected" type="String[]" default="abc, def"/>
+    <br/><br/>
+    
+    <b> Folders For User </b><br/>
+    <aura:iteration var="r" items="{!v.reg}" >
+        <lightning:button label="{!r.Name}" onclick="{!c.fetchPickListVal}" value="{!r.Id}"/> <br/>
+        
+    </aura:iteration> 
+    
+      
+    <br/>
+   <br/>
+    <!--<c:multiPicklist /><br/><br/>-->
+    <aura:attribute name="searchText" type="String" default=""/>
+    <div class="slds-m-left_x-large ">
+    <div class="slds-form-element slds-lookup" data-select="single">
+        <div class="slds-form-element__control">
+            <div class="slds-input-has-icon slds-input-has-icon--right slds-col slds-size_1-of-3">              
+                <ui:inputText value="{!v.searchText}" class="slds-lookup__search-input slds-input" placeholder="Search" keyup="{!c.searchTextVal}"/>
+            </div>
+        </div>
+    </div>       
+    <br/>
+    <div class="slds-grid slds-gutters" style="width:80%; height:100px; marging-auto:15px">
+    <div class="slds-form-element slds-col slds-size_1-of-2">
+      <label class="slds-form-element__label slds-text-heading_medium" for="select-01">List of All Documents</label>
+      <div class="slds-select_container">
+         <ui:inputSelect aura:id="accIndustry1" class="slds-select"  multiple="true" change="{!c.onSelectChange}"/>
+      </div>
+   </div>
+<!--	 <div class="slds-col">
+         <span> <lightning:button label=">>" onclick="{!c.fetchPickListVal}" value=""/> </span> <br/>
+         <span> <lightning:button label=">>" onclick="{!c.fetchPickListVal}" value=""/> </span>
+     </div>      --> 
+    <div class="slds-form-element slds-col slds-size_1-of-2">
+      <label class="slds-form-element__label slds-text-heading_medium" for="select-01">Documents Available in Folder</label>
+      <div class="slds-select_container">
+         <ui:inputSelect aura:id="accIndustry" class="slds-select"  multiple="true"/>
+      </div>
+        </div> <br/>
+         <div class="slds-form-element slds-col slds-size_1-of-2" style="width:80%; height:100px; marging-top:150px">
+   Selected Documents:
+    <aura:iteration var="r" items="{!v.selected}" >
+        <!--<lightning:button label="{!r}" onclick="{!c.fetchPickListVal}" value="{!r}"/> -->
+        <div >
+            {!r} <br/>
+        </div>
+    </aura:iteration> 
+        </div>
+        </div>
+        
+    </div>
+    
+    <br/> <br/> <br/>
+   
+</aura:component>

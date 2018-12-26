@@ -1,0 +1,9 @@
+<apex:page controller="LoginSuccessContrl">
+    <apex:form >
+        <apex:pageMessage summary="You have been registered successfully." severity="confirm" strength="3" />
+        <apex:outputPanel style="margin-left:25px;">
+            Please &nbsp;<apex:outputLink value="/apex/loginHome">click here</apex:outputLink> to go to the Login Home page or else you will be redirected to the Login Home page in 5 Sec.
+        </apex:outputPanel> 
+        <apex:actionPoller interval="5" action="{!loginHomeRedirect}"/>
+    </apex:form>
+</apex:page>

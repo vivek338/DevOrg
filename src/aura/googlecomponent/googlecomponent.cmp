@@ -1,0 +1,4 @@
+<aura:component implements="force:appHostable">
+			<!--aura:registerEvent name="navigateToURL" type="c:navigateToURL"/-->
+			<ui:button press="{!c.navigateIt}"  label="Go!" />
+</aura:component>

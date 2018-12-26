@@ -1,0 +1,52 @@
+<aura:component controller="FilesInFolderApexController">
+	<aura:attribute name="folderRecordId" type="String" default=''/>
+    
+    <aura:attribute name="items" type="Object"/>
+      <ltng:require styles="{! $Resource.	datatable + '/DataTables-1.10.16/media/css/jquery.dataTables.min.css'}" 
+                  scripts="{!join(',', 
+                           $Resource.jquery224 , 
+                           $Resource.datatable + '/DataTables-1.10.16/media/js/jquery.dataTables.min.js')
+                           }" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    
+    <aura:attribute name="displayFiles" type="boolean" default="false" />
+      <aura:handler event="c:FilesInFolderRefresh" action="{!c.doInit}"/>
+  <!--  {!v.folderRecordId}-->
+     <aura:if isTrue="{!v.items.length>0}">
+         <div>
+             <p><b>Files in Folder</b></p>
+             <!--<aura:iteration var="r" items="{!v.items}" >      
+                 <p> {!r.ContentDocument.Title}</p>
+             </aura:iteration>-->
+         </div>
+         <form id="frm-example" action="/path/to/your/script" method="POST">
+         <div>
+             <center><lightning:button variant="brand" label="Save" onclick="{!c.saveMethod}" iconName="utility:save" />   </center>
+          <div class="slds-m-around_medium">
+        <table id="tableId" class="slds-table slds-table_bordered slds-table_cell-buffer" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>  <ui:inputCheckbox label="" class="check" aura:id="master" click="{!c.checkAll}" /> </th>
+                    <th>Title</th>       
+                     <th>ID</th>       
+                    <th>Last Modified Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.items}" var="acc">
+                    <tr>
+                        <td> <ui:inputCheckbox aura:id="dependent" value="{!acc.action}" click="{!c.checkAlone}" /></td>  
+                        <td>{!acc.title}</td>
+                        <td>{!acc.recordId}</td>
+                        <td>{!acc.lastModifiedDate}</td>
+                    </tr>
+                </aura:iteration>  
+            </tbody>
+        </table>
+    </div>
+         </div>
+         </form>
+    </aura:if>
+   
+</aura:component>

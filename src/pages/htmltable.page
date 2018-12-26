@@ -1,0 +1,170 @@
+<apex:page controller="testhtml" sidebar="false">
+<script type="text/javscript">
+    function alertInputValue(){
+        var var1 =  document.getElementById('IP01').value;
+        alert('Die Variable lautet: 'var1 + 'that's it');
+    }
+</script>
+<style>
+table, td, th {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    height: 50px;
+}
+</style>
+<apex:form >
+  
+ 
+  
+  <!--table class="table" id="popup">
+                                        <tr>
+                                            <th>Advisory Platform Name</th>
+                                            <th>Account</th>
+                                            <th>Recommended Fund List</th>
+                                            <th>Securities</th>
+                                            <th>Share Classes</th>
+                                            <th>Influence</th>
+                                            <th>&nbsp;&nbsp;Fund List&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                            <th> test column </th>
+                                        </tr> 
+                                        <tr>
+                                        <th> row 2 </th>
+                                        </tr>
+                                        </table-->
+     <!--apex:repeat value="{!listOfitems}" var="str" -->
+     <apex:pageblock >
+     <apex:outputPanel layout="block">
+     <apex:repeat value="{!Months}" var="mon" >     
+         {!mon} &nbsp;&nbsp;&nbsp;&nbsp;
+     </apex:repeat> 
+     </apex:outputPanel>
+     <apex:repeat value="{!Price}" var="pr">
+     {!pr.Price__c}
+     </apex:repeat>
+     </apex:pageblock>
+     <apex:pageBlock title="Info From Query" >
+            <apex:pageBlockTable value="{!accLst}" var="a" rows="15" columnsWidth="400px" >
+                <apex:Column value="{!a.Name}" />
+                <apex:Column headerValue="Contact Names">
+                    <apex:repeat value="{!a.Contacts}" var="c">
+                    <apex:inputField value="{!c.FirstName}"/>
+                      
+                    </apex:repeat>
+                </apex:Column>
+            </apex:pageBlockTable>
+            
+        </apex:pageBlock>
+        <apex:pageBlock title="Info From Wrapper class">
+            <apex:pageblocktable value="{!wrapperAccConLst}" var="w" width="30%">
+                <apex:column headerValue="select box">
+                    <apex:inputCheckbox value="{!w.checkbox}"/>
+                </apex:column>
+                <apex:column headerValue="TExt msg">
+                    <apex:outputText value="{!w.inputbox}"/>
+                </apex:column>
+                <apex:Column value="{!w.acc.Name}" />
+                <apex:column headervalue="Contact Names">
+                    <apex:repeat value="{!w.con}" var="c">
+                        {!c.FirstName} {!c.LastName} 
+                    </apex:repeat>
+                </apex:column>
+            </apex:pageblocktable>
+            <apex:commandButton value="select" action="{!ProcessSelected}" reRender="selected"/>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="selected records" id="selected" >
+            <apex:pageblocktable value="{!selwrapperAccConLst}" var="w1">
+                <apex:column headerValue="select box">
+                    <apex:inputCheckbox value="{!w1.checkbox}"/>
+                </apex:column>
+                <apex:column headerValue="TExt msg">
+                    <apex:outputText value="{!w1.inputbox}"/>
+                </apex:column>
+                <apex:Column value="{!w1.acc.Name}" />
+                <apex:column headervalue="Contact Names">
+                    <apex:repeat value="{!w1.con}" var="c1">
+                        {!c1.FirstName} {!c1.LastName} 
+                    </apex:repeat>
+                </apex:column>
+            </apex:pageblocktable>
+        </apex:pageBlock>
+        <apex:pageBlock >
+                <apex:pageBlockTable value="{!accts}" var="ac" id="table">
+                <apex:facet name="footer">
+                    <apex:CommandLink action="{!addRow}" value="Add Row" rerender="table"/>
+                </apex:facet>
+                    <apex:column headerValue="Account Name">
+                        <apex:inputfield value="{!ac.name}" id="IP01"  />
+                    </apex:column>
+                    <apex:column headerValue="Billing City">
+                        <apex:inputfield value="{!ac.BillingCity}" />
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:commandButton action="{!save}" value="Save" onclick="alertInputValue();"/>
+            
+        </apex:pageBlock>
+     <!--apex:pageblock>
+         <apex:pageblockTable value="{!listOfitems}" var="tb">
+         <apex:column rowspan="12">
+         <apex:inputText value="{!tb.name}"/>
+         </apex:column>
+         </apex:pageblockTable>
+         </apex:pageblock-->
+     <!--/apex:repeat-->   
+     
+    <apex:panelGrid columns="2" id="theGrid">
+        <apex:outputText value="First" id="theFirst"/>
+        <apex:outputText value="Second" id="theSecond"/>
+        <apex:outputText value="Third" id="theThird"/>
+        <apex:outputText value="Fourth" id="theFourth"/>
+    </apex:panelGrid>
+    <table id="theGrid">
+    <tbody>
+        <tr>
+            <td><span id="theFirst">First</span></td>
+            <td><span id="theSecond">Second</span></td>
+            <td><span id="theThird">Third</span></td>
+        </tr>
+        <tr>
+            <td><span id="theFourth">Fourth</span></td>
+        </tr>
+    </tbody>
+</table>
+<table>
+    <tr>
+    <th>Resource Name</th>
+    <th>Januarye</th>
+    <th>Feburary</th>
+    <th>March</th>
+    <th>April</th>
+    <th>May</th>    
+    <th>June</th>
+    <th>July</th>
+    <th>August</th>
+    <th>September</th>
+    <th>October</th>
+    <th>November</th>
+    <th>December</th>
+  </tr>
+  <tr>
+    <td>INYVIVS</td>
+     <apex:repeat value="{!Numbers}" var="prr">
+     <td>
+     {!prr}
+     </td>
+     </apex:repeat>
+  
+     </tr>
+  
+</table>
+
+                                    
+ </apex:form> 
+</apex:page>

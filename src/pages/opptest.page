@@ -1,0 +1,13 @@
+<apex:page standardController="Opportunity">
+    <script type="text/javascript">
+    setTimeout(function() {
+        var myURL = '/apex/hello';
+        // if(typeof sforce != 'undefined'  sforce != null) {
+            sforce.one.navigateToURL(myURL + '&isdtp=p1');
+            // } else {
+            //    document.write("Not enabled except for mobile.");
+            // }
+    }, 1);
+    </script>
+    Redirecting...
+    </apex:page>

@@ -1,0 +1,75 @@
+<apex:page standardController="Contact"  recordSetvar="Cont" contentType="application/vnd.ms-excel#SalesForceExport.xls" cache="true" sidebar="false" showHeader="false" >
+    <head>
+        <style>
+            .head { font-size:1.3em; }
+            @page{
+                size: A4 landscape;
+            }                       
+        </style>
+        <style type="text/css" media="print">
+                       @page {
+                                 @top-center {
+                                       content: "Financial Force";
+                               }
+                               @top-right {
+                                       content: "Financial Force";
+                               }
+                               @top-left {
+                                       content: "Financial Force";
+                               }
+                               @bottom-left {
+                                     content: element(footer);
+                               }
+                            }
+                                     div.header {
+                                      padding: 10px;
+                                      position: running(header);
+                           }
+                    </style>
+    </head>
+<!--    <apex:slds />-->
+   <body>
+        <div class="slds-scope">
+            <apex:form >
+                <apex:sectionHeader title="Financial Force Contacts" subtitle="Financial Home" help="https://help.salesforce.com/articleView?err=1&id=contacts_overview.htm&siteLang=en_US&type=0" />
+                <apex:panelGrid columns="6">
+                    <apex:outputLabel value="View:" />
+                    <apex:selectList value="{!filterId}" size="1" id="sel">
+                        <apex:actionSupport event="onchange" action="{!list}" />
+                        <apex:selectOptions value="{!listviewoptions}" />
+                    </apex:selectList>
+                    <apex:commandButton value="GO!" action="{!list}" />
+                    <apex:outputLink value="/ui/list/FilterEditPage?id=00B6F00000Al7Mj&retURL=%2F003&cancelURL=%2F003%2Fo">
+                        <apex:outputtext value="Edit"/>
+                    </apex:outputLink>|
+                    <apex:outputLink value="/ui/list/FilterEditPage?ui/list/FilterEditPage?ftype=c&retURL=%2F003&cancelURL=%2F003%2Fo">
+                        <apex:outputtext value="Create New View"/>
+                    </apex:outputLink>
+                </apex:panelGrid>
+                
+                <apex:pageBlock >
+                    <apex:panelGrid columns="2" width="50%">
+                        <h1 class="head">Recent Contacts</h1>
+                        <apex:commandButton value="New" action="/001/e" />
+                    </apex:panelGrid>
+                    <apex:pageBlockTable value="{!cont}" var="item"  id="list">
+                        <apex:column headerValue="Name">
+                            <apex:outputLink value="/{!item.id}">
+                                <apex:outputText >{!item.name}</apex:outputText>
+                            </apex:outputLink>
+                        </apex:column>
+                        <apex:column headerValue="Account Name">
+                            <apex:outputLink value="/{!item.accountid}">
+                                <apex:outputtext value="{!item.Account.name}"/>
+                            </apex:outputlink>
+                        </apex:column>
+                        
+                        <apex:column headerValue="Phone">
+                            <apex:outputtext value="{!item.phone}"/>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:form>
+        </div>               
+    </body>
+</apex:page>

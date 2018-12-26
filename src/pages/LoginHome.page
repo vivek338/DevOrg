@@ -1,0 +1,30 @@
+<apex:page sidebar="false" showHeader="false" controller="loginHomeContrl">
+    <apex:pageMessages />
+    <apex:form >
+      <apex:pageBlock title="Login Home Page" mode="edit" >
+      <apex:pageBlockSection >
+      <apex:pageBlockSection columns="1">
+      <apex:image value="{!$Resource.emplyee}" width="400" height="200"/>
+      </apex:pageBlockSection>
+          <apex:pageBlockSection collapsible="false" title="Please Login" columns="1" >
+              
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel value="Username" />
+              <apex:inputText value="{!username}" />
+              </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel value="Password" />
+              <apex:inputsecret value="{!password}"/>
+              </apex:pageBlockSectionItem>
+          </apex:pageBlockSection>
+          </apex:pageBlockSection>
+          <center>
+          <apex:panelGrid columns="3"   >
+              <apex:commandButton value="Login" action="{!validateLogin}"/>
+              <apex:commandButton value="Cancel" />
+              <apex:commandButton value="Register?" action="/apex/LoginRegistration" />
+          </apex:panelGrid>
+          </center>
+      </apex:pageBlock>
+    </apex:form>
+</apex:page>

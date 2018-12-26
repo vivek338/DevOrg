@@ -1,0 +1,3 @@
+<aura:component >
+	<ui:button press="{!c.navigate}" label="Display Numbers" />
+</aura:component>

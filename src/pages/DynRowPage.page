@@ -1,0 +1,26 @@
+<apex:page sidebar="false" controller="dynamicrow" >
+<apex:form >
+    <apex:pageBlock id="membAdd" >                  
+        <apex:pageblockSection >
+            <apex:pageBlockTable value="{!memberAddList}" var="memb">
+                <apex:column headerValue="Member Name">
+                    <apex:inputText value="{!memb.Name}"/>
+                </apex:column>
+                <apex:column headerValue="Mobile Number">
+                    <apex:inputField value="{!memb.Type__c}"/>
+                </apex:column>
+                <apex:column headerValue="eMail Id">
+                    <apex:inputText value="{!memb.Name}"/>
+                </apex:column>
+            </apex:pageBlockTable> 
+            <br/><apex:commandLink value="Add Row" action="{!addRow}" reRender="membAdd"/>        
+        </apex:pageblockSection>        
+        <apex:pageblockSection columns="1" >
+            <apex:pageblockSectionItem >
+                <apex:commandButton value="Save" />
+                <apex:commandButton value="Cancel" />
+            </apex:pageblockSectionItem>         
+        </apex:pageblockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

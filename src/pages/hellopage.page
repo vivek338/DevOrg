@@ -1,0 +1,45 @@
+<apex:page controller="hellopagecontroller" renderAs="pdf">
+<script>
+function handleNextButton(){
+        var radios = document.getElementsByName('selectOffice');
+        var selectedOfficeByUser;
+        for (var i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) {
+                selectedOfficeByUser=radios[i].value;
+                break;
+            }
+        }
+        alert("selectedOffice"+selectedOfficeByUser);
+        redirectToNextPage(selectedOfficeByUser);
+    };
+    
+     function closeWindow() {
+            alert(1);
+            window.close();
+           
+        }
+</script>
+<apex:form >
+
+ <apex:inputText value="{!inputstring}" />
+  <apex:commandButton action="{!go}" value="Go.."/>
+  <apex:pageBlock >
+  <apex:pageblockSection >
+  <apex:pageblockTable value="{!acclst}" var="acc">
+      
+           <apex:column >
+                        <input id="radio-{!acc.id}" type="radio" name="selectOffice" value="{!acc.id}"/>
+                    </apex:column>
+      
+      <apex:column headerValue="account name" value="{!acc.name}"/>
+      <apex:column headerValue="account id" value="{!acc.id}"/>
+  </apex:pageblockTable>
+  </apex:pageblockSection>
+  <button type="button" onclick="handleNextButton();closeWindow();" >Next</button>
+            <apex:actionFunction action="{!redirectToRecordTypeSelection}" name="redirectToNextPage" reRender="">
+                <apex:param name="selectedOffice" value=""/>
+            </apex:actionFunction>
+            
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

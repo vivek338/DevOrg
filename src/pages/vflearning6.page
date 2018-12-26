@@ -1,0 +1,26 @@
+<apex:page controller="actionfun">
+<apex:pageMessages />
+<script>
+function Call()
+{
+     alert("Search suggestions can come here!!");
+     hold();
+}
+
+function Callagain()
+{
+     alert("Search suggestions can come here AGAIN!!");
+     holdagain();
+}
+
+</script>
+
+<apex:form >
+
+   <input id="txt_Search" type="text" onchange="Call()" />
+      <apex:actionFunction action="{!call}" name="hold" onComplete="Callagain()"/>
+      <apex:actionFunction action="{!callagainofcont}" name="holdagain" />
+     
+</apex:form> 
+
+</apex:page>

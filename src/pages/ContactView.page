@@ -1,0 +1,13 @@
+<apex:page standardController="Contact">
+<apex:Form >
+  <apex:pageBlock >
+      <apex:pageblockSection >
+          
+              <apex:outputLabel title="FirstName"  value="{!Contact.FirstName}"/>
+              <apex:outputLabel title="LastName" value="{!Contact.LastName}"/>
+              <apex:outputLabel title="Owners Email" value="{!Contact.Owner.Email}"/>
+          
+      </apex:pageblockSection>
+  </apex:pageBlock>  
+</apex:Form>
+</apex:page>

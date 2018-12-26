@@ -1,0 +1,20 @@
+<apex:page controller="CustomListController">
+  <apex:form >
+        <apex:pageBlock title="CustomListController Page" id="pb1">
+            <apex:pageBlockTable value="{!cases}" var="cs" id="pbTable">
+                <apex:column headerValue="Case Number">
+                    <apex:outputLink value="/{!cs.Id}">{!cs.CaseNumber}</apex:outputLink>
+                </apex:column>
+                <apex:column value="{!cs.Status}"/>
+                <apex:column value="{!cs.AccountId}"/>
+                <apex:column value="{!cs.ContactId}"/>
+            </apex:pageBlockTable>
+            <apex:panelGrid columns="4">
+                <apex:commandButton value="First" action="{!con.first}" disabled="{!!con.hasPrevious}" rerender="pb1"/>
+                <apex:commandButton value="Previous" action="{!con.previous}" disabled="{!!con.hasPrevious}" rerender="pb1"/>
+                <apex:commandButton value="Next" action="{!con.next}" disabled="{!!con.hasNext}" rerender="pb1"/>
+                <apex:commandButton value="Last" action="{!con.last}" disabled="{!!con.hasNext}" rerender="pb1"/>
+            </apex:panelGrid>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

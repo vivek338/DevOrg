@@ -1,0 +1,8 @@
+<apex:page controller="testpdfcontroller" renderAs="pdf" sidebar="false" showHeader="false">
+
+ <!-- <Apex:detail /> -->
+ <apex:repeat value="{!accLst}" var="acc">
+     <apex:detail subject="{!acc.id}" relatedList="false" title="false"/>
+ </apex:repeat>
+  
+</apex:page>

@@ -1,0 +1,22 @@
+<apex:page controller="accountcontrol">
+
+<apex:pageBlock title="account names">
+<apex:pageblockSection title="account">
+
+<apex:pageBlockSectionItem >
+acc
+</apex:pageBlockSectionItem>
+</apex:pageblockSection>
+<apex:pageBlockTable value="{!accounts}" var="item">
+<apex:column headerValue="Account Name" >
+{!item.name}
+</apex:column>
+<apex:column >
+{!item.id}
+</apex:column>
+
+</apex:pageBlockTable>
+
+</apex:pageBlock>
+
+</apex:page>

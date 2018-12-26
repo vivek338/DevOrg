@@ -1,0 +1,28 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="formatdate" type="Date"/>
+    <aura:attribute name="expense" type="Expenserec__c"/>
+    <lightning:card title="{!v.expense.Name}" iconName="standard:scan_card"
+                    class="{!v.expense.Reimbursed__c?'slds-theme--success':''}">
+    	<aura:set attribute="footer">
+            <p>Date: <lightning:formattedDateTime value="{!v.formatdate}"/></p>
+            <p class="slds-text-title"><lightning:relativeDateTime value="{!formatdate}" /></p>
+        </aura:set>
+        <p class="">
+            Amount: <lightning:formattedNumber value="{!v.expense.Amount__c}" style="currency"/>
+        </p>
+        <p class="">
+            Client: {!v.expense.Client__c}
+        </p>
+        <p>
+        	<lightning:input type="toggle"
+                             label="Reimbursed?"
+                             name="reimbursed"
+                             class="slds-p-around--small"
+                             checked="{!v.expense.Reimbursed__c}"
+                             messageToggleActive="Yes"
+                             messageToggleInactive="No" />
+                                                                
+        </p>
+    </lightning:card>
+</aura:component>

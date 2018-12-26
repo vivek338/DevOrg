@@ -1,0 +1,10 @@
+<apex:page controller="contactcon">
+<apex:form >
+<apex:pageBlock >
+  <apex:commandLink onclick="{!clickme}" value="{!con.lastname}" ></apex:commandLink>
+  </apex:pageBlock>
+  <apex:pageBlock rendered="{!diplayblock}">
+      <apex:outputText value="{!con.id}"></apex:outputText>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

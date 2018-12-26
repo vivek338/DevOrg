@@ -1,0 +1,6 @@
+<apex:page >
+  
+  <apex:form >
+      <c:DialogBox ></c:DialogBox>
+  </apex:form>
+</apex:page>

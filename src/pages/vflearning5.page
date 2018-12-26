@@ -1,0 +1,47 @@
+<apex:page controller="vflearning5">
+<apex:form >
+<apex:actionFunction name="get_details" action="{!callnumbers}">
+<apex:param name="each_url" value="" assignTo="{!var}"/>
+</apex:actionFunction>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#txt_Search").keyup(function(){
+     var searchQuery = $("#txt_Search").val();
+    alert('hi the text you have entered is='+searchQuery );
+       
+    });
+});
+
+</script>
+
+<a id="txt_Search1"  onClick="call_claim_details('abcd')" >
+first box
+</a>
+<script>
+function Call(memberid)
+{
+var mid=memberid;
+     alert("Search suggestions can come here!!"+mid);
+     
+}
+function CallAgain(mname)
+{
+var mname=mname;
+     alert("Calling Again -Search suggestions can come here!!"+mname);
+      cnum(mname);
+}
+function call_claim_details(passedUrl){
+
+     each_url = passedUrl;
+     alert("eachurl"+each_url);
+     
+     get_details(each_url);
+ }
+
+</script>
+
+second box
+<input id="txt_Search" type="text" />
+</apex:form>
+</apex:page>

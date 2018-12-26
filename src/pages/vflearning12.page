@@ -1,0 +1,59 @@
+<apex:page id="myPage" controller="ProjectLink2" tabStyle="Account" showHeader="false" sidebar="false">
+    <script>   
+        function expandAll(){
+            for(var i = 0; i < {!accsandtmember.size}; i++){            
+                document.getElementById('myPage:myFrm:pbMain:tab:acctab:' + i + ':inlinetablesec').style.display = '';
+            }
+            return false;
+        }
+        function collapseAll(){
+            for(var i = 0; i < {!accsandtmember.size}; i++){
+                document.getElementById('myPage:myFrm:pbMain:tab:acctab:' + i + ':inlinetablesec').style.display = 'none';
+            }
+            return false;
+        }            
+    </script>    
+    <apex:form id="myFrm">
+        <apex:pageBlock id="pbMain" >                                                     
+            <apex:pageBlocksection title="Account Details" id="tab"  >             
+                <apex:outputpanel >
+                    <a href="#"  onclick="expandAll();" title="Expand - Team Member's" >Expand All</a>
+                </apex:outputpanel> 
+                <apex:outputpanel >  
+                    <a href="#"  onclick="collapseAll();" title="Collapse - Team Member's" >Collapse All</a> 
+                </apex:outputpanel>                                 
+                <apex:pageblocktable value="{!accsandtmember}"  var="accdet" id="acctab" >   
+                    <apex:column >                  
+                        <apex:facet name="header" >                                        
+                            Accounts                                                                               
+                        </apex:facet>
+                        <apex:outputpanel >
+                            <apex:outputlabel value="{!accdet.Name}"  onclick="switchMenu('{!$Component.inlinetablesec}')" title="Expand - Account detail's"/> 
+                        </apex:outputpanel>
+                        <apex:outputpanel style="display:none;">
+                            <apex:outputlabel value="{!accdet.Name}" onclick="switchMenu('{!$Component.inlinetablesec}')" title="Collapse -  Account detail's"/>
+                        </apex:outputpanel>
+                        <apex:outputpanel id="inlinetablesec" style="display:none;">
+                            <apex:variable value="{!0}" var="rowNum"/>
+                            <apex:repeat var="count" value="{!accdet.Name}">
+                                <apex:variable var="rowNum" value="{!rowNum+1}"/>
+                            </apex:repeat>
+                            <apex:outputText rendered="{!rowNum=0}">  No Account Details  </apex:outputText>
+                            <apex:pageblocktable value="{!accdet}" id="tableid" var="tm" rendered="{!rowNum>0}">
+                                <apex:column headerValue="Country">
+                                    <apex:outputfield value="{!tm.BillingCountry}"/>
+                                </apex:column>
+                                <apex:column headerValue="Industry">
+                                    <apex:outputfield value="{!tm.Industry}"/>
+                                </apex:column>                        
+                            </apex:pageblocktable>
+                        </apex:outputpanel>     
+                    </apex:column> 
+                   <!-- <apex:column value="{!accdet.SLASerialNumber__c }" / >                    
+                    <apex:column value="{!accdet.CustomerPriority__c }"/> 
+                    <apex:column value="{!accdet.status__c  }"/>  -->     
+                </apex:pageblocktable>                  
+            </apex:pageBlocksection>
+        </apex:pageBlock>    
+    </apex:form>     
+</apex:page>

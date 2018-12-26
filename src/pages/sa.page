@@ -1,0 +1,57 @@
+<apex:page Controller="ViewStateController">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+$(document).ready(function() {
+$('.my-class').delay(1000).fadeIn(500);
+});
+
+setTimeout(function(){
+document.getElementById('div1').style.visibility = "visible";
+},1000);
+
+window.onload = function startShowing(){
+  var elementToHide = document.getElementById("show");
+  elementToHide.style.opacity = 0;
+  var intervalId = setInterval(function(){
+    if(elementToHide.style.opacity >= 1)
+    {
+      clearInterval(intervalId);
+    }else{
+      elementToHide.style.opacity = parseFloat(elementToHide.style.opacity) + 0.1;
+    }
+  },250);
+}
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").toggle();
+    });
+});
+</script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <style>
+      #myButton {
+  display: none;
+}
+.hide{
+opacity:0;
+}
+</style>
+<apex:form >
+<apex:commandButton value="Click Me" action="{!changeData}"/>
+a={!a}
+<apex:inputtext value="{!e}" />
+<div id="text1" class="my-class">Cat<button id="myButton">Next Page</button></div>
+<div id="text2">Dog</div> 
+<div id="div1" style="visibility:hidden;">tesxtt</div>
+
+<div class="hide" id="show"> show me </div>
+<button onclick="startShowing(); return false;"> SHOW </button>
+<button onclick="this.onclick=function(){return false;};">Toggle between hiding and showing the paragraphs</button>
+
+<p>This is a paragraph with little content.</p>
+<p>This is another small paragraph.</p>
+</apex:form>
+</apex:page>

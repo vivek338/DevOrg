@@ -1,0 +1,13 @@
+<apex:page controller="namesearch">
+
+  <apex:form >
+  <script>
+    function search(data){
+    alert("in sarch ");
+    alert("value="+data.value);
+    }
+</script>
+      <apex:InputText id="textbox" value="{!stringsearch}" onKeyUp="search(this)"/>
+      <apex:outputLink value="/home/home.jsp" target="_blank" onclick="window.open('/apex/hellopage', 'newwindow','width=600, height=500'); return false;">Search</apex:outputLink>
+  </apex:form>
+</apex:page>

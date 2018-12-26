@@ -1,0 +1,48 @@
+<apex:page >
+<apex:form >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+    <style>
+ #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+  #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+  #resizable { width: 150px; height: 150px; padding: 0.5em; }
+  #resizable.h3 { text-align: center; margin: 0; }
+  </style>
+<script>
+$( function() {
+$( function() {
+$( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+    $( "#resizable" ).resizable();
+  } );
+    $( "#draggable" ).draggable();
+    $( "#droppable" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+  } );
+</script>
+  DAte: 
+  <apex:inputtext label="date" id="date"/>
+  <input type="text" name="date" id="date" ></input>
+<!--  <div id="draggable" class="ui-widget-content">
+  <p>Drag me to my target</p>
+</div>
+ 
+<div id="droppable" class="ui-widget-header">
+  <p>Drop here</p>
+</div> -->
+<div id="resizable" class="ui-widget-content">
+  <h3 class="ui-widget-header">Resizable</h3>
+</div>
+<p>Date: <input type="text" id="datepicker"></input></p>
+  </apex:form>
+</apex:page>

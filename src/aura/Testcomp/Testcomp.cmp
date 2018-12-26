@@ -1,0 +1,19 @@
+<aura:component controller="TestcompApexController">
+     <aura:attribute name="types" type="String[]" default="['abc1','def1','abc']"/>
+    <aura:attribute name="let" type="String" default="jh"/>
+    <div class="slds-col">
+            <div class="slds-float_right">
+                <!--<lightning:button aura:id="addrow" label="Add Row"
+                                  variant="neutral" onclick="{!c.addRow}" />-->
+                <ui:button aura:id="button" buttonTitle="Click to see what you put into the field" class="button" label="Click me" press="{!c.getInput}"/>
+            </div>
+        </div>
+	<ui:inputSelect class="slds-input slds-text-align-center">
+        <aura:iteration items="{! v.types }" var="type" >
+       		<option value="{!type}" selected="{!type=='pq'}">{!type}</option>
+            
+        </aura:iteration>
+        <!--<option value="3" selected="{!v.let=='pq'}">3</option>-->
+       
+	</ui:inputSelect>
+</aura:component>

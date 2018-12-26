@@ -1,0 +1,10 @@
+<apex:page standardController="Account">
+  <apex:pageBlock >
+    <apex:detail relatedList="false"/>
+    </apex:pageBlock>
+    <apex:pageBlock >
+        <apex:pageblocksection >
+            <apex:outputText > hi </apex:outputText>
+        </apex:pageblocksection>
+    </apex:pageBlock>
+</apex:page>

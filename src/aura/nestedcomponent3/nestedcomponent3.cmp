@@ -1,0 +1,6 @@
+<aura:component controller="SimpleServersideController">
+    <aura:attribute name="firstname" type="string" default="Mylife my likes" />
+    <ui:button label="Call server" press="{!c.echo}" />
+    
+	
+</aura:component>

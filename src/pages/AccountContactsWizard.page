@@ -1,0 +1,33 @@
+<apex:page standardController="Account" extensions="AccountContactsWizardExt" >
+    <apex:pageMessages />
+        <apex:form >
+              <apex:pageBlock title="{!Account.Name} Related Contact">
+                  <apex:pageBlockSection columns="1" title="Select Contacts">
+                      <apex:pageBlockTable value="{!contacts}" var="contactvar" >
+                         <apex:column headerValue="Action">
+                              <apex:inputcheckbox value="{!contactvar.isTrue}" />
+                          </apex:column>
+                          <apex:column headerValue="{!$ObjectType.contact.fields.name.label}">
+                              <apex:outputLink value="/{!contactvar.con.id}"> {!contactvar.con.name} </apex:outputLink>
+                          </apex:column>              
+                          <apex:column value="{!contactvar.con.email}"/>
+                          <apex:column value="{!contactvar.con.accountId}"/>
+                          <apex:column value="{!contactvar.con.phone}"/>
+                      </apex:pageBlockTable>
+                  </apex:pageBlockSection>
+                  <apex:pageBlockSection columns="1">
+                      <apex:pageBlockSectionItem >
+                          <apex:outputLabel value="Subject"/>
+                          <apex:inputText value="{!subject}" size="50"/>
+                      </apex:pageBlockSectionItem>
+                      <apex:pageBlockSectionItem >
+                          <apex:outputLabel value="body" />
+                          <apex:inputTextarea value="{!emailbody}" cols="80" rows="10"/>
+                      </apex:pageBlockSectionItem>
+                      <apex:panelGrid style="margin-left:18%">
+                          <apex:commandButton value="SendEmail" action="{!sendemail}" onclick="if(!confirm('Are you Sure?')){return false};"/>
+                      </apex:panelGrid>
+                  </apex:pageBlockSection>          
+             </apex:pageBlock>
+      </apex:form>
+</apex:page>

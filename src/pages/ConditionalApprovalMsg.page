@@ -1,0 +1,7 @@
+<apex:page standardController="Course_Application__c">
+    <apex:outputPanel rendered="{!if(Course_Application__c.Status__c == 'Conditional Approval', true, false)}">
+        <center>
+            <apex:outputText value="{!$Label.Reference_field_mandatory}" style="color:red;font-weight:bold;"/>
+        </center>
+    </apex:outputPanel>              
+</apex:page>

@@ -1,0 +1,63 @@
+<!--=====================================================================
+ * (c) 2018 Appirio - A Wipro Company, Inc
+ * Name: MultiSelect.cmp
+ * Description:
+ * Created Date: April 4, 2018 SSCD-631
+ * Cretaed By: Ujjawal Kumar (Appirio - A Wipro Company)showSelectedAccounts
+ * Date Modified      Modified By                  Description of the update
+ *  14 Jun 2018			Aman Dua					Updated to fix SSCD-1284
+ *  ===================================================================== -->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!--public attributes-->
+    <aura:attribute name="options" type="String[]"/>
+    <aura:attribute name="selectedItems" type="String[]" />
+    <aura:attribute name="width" type="String" default="12rem" />
+    <aura:attribute name="dropdownLength" type="Integer" default="5" />
+    <aura:attribute name="dropdownOver" type="Boolean" default="false" />
+    <aura:attribute name="isdisabled" type="String" default=""/>
+    <aura:attribute name="defaultText" type="String" default="Select an option..."/>
+    
+    <!--private attributes-->
+    <aura:attribute name="options_private" type="String[]" />
+    <aura:attribute name="infoText" type="String" default="Select an option..." />
+    
+    <!--let the framework know that we can dispatch this event-->
+    <aura:registerEvent name="SelectChange" type="c:SelectChange" />
+    
+    <aura:method name="reInit" action="{!c.init}"
+                 description="Allows the lookup to be reinitalized">
+    </aura:method>
+     <aura:method name="reset" action="{!c.resetPicklist}"
+                 description="Allows the lookup to">
+    </aura:method>
+
+
+  <aura:method name="checkSelected" action="{!c.handleSelected}"
+                 description="mark already save as checked">
+      <aura:attribute name="param1" type="Set"/>
+  </aura:method>
+    <div aura:id="main-div"  class=" slds-picklist slds-dropdown-trigger slds-dropdown-trigger--click " style="{!'width:100%;'}">
+        <!--the disclosure triangle button-->
+        <button class="slds-button slds-button--neutral slds-picklist__label textColor" style="{!'width:90%; min-width:' + v.width }" disabled="{!v.isdisabled}"
+                aria-haspopup="true" onclick="{!c.handleClick}" onmouseleave="{!c.handleMouseOutButton}">
+            <span class="slds-truncate" title="{!v.infoText}">{!v.infoText}</span>
+            <lightning:icon iconName="utility:down" size="small" class="slds-icon" />
+        </button>
+        <!--the multiselect list-->
+        <div class="slds-dropdown slds-dropdown--left" onmouseenter="{!c.handleMouseEnter}" onmouseleave="{!c.handleMouseLeave}">
+            <ul class="{!'slds-dropdown__list slds-dropdown--length-' + v.dropdownLength}" role="menu">
+                
+                <aura:iteration items="{!v.options_private}" var="option">
+                    <li class="{!'slds-dropdown__item ' + (option.selected ? 'slds-is-selected' : '')}"
+                        role="presentation" onclick="{!c.handleSelection}" data-value="{!option.value}" data-selected="{!option.selected}">
+                        <a href="javascript:void(0);" role="menuitemcheckbox" aria-checked="true" tabindex="0" >
+                            <span class="slds-truncate">
+                                <aura:if isTrue="{!option.selected}"><lightning:icon iconName="utility:check" size="x-small" class="slds-icon slds-icon--selected slds-icon--x-small slds-icon-text-default slds-m-right--x-small" /></aura:if>{!option.value}
+                            </span>
+                        </a>
+                    </li>
+                </aura:iteration>   
+            </ul>
+        </div>
+    </div>
+</aura:component>

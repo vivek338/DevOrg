@@ -1,0 +1,30 @@
+<aura:component implements="force:lightningQuickAction">
+    <p>Hello Lightning!</p>
+    <c:helloHeading />
+    <aura:attribute name="num1" type="integer" default="10" />
+    <aura:attribute name="num2" type="integer" default="30" />
+    <aura:attribute name="sum" type="integer"  />
+    <aura:attribute name="values1" type="string" default="hey" />
+    
+    {!v.num1}+{!v.num2}={!v.sum}
+    <br></br>
+    <ui:button label="Add them" press="{!c.add}" />
+    {!v.values1}
+    <br></br>
+    {!$Browser.isTablet}<br></br>
+    {!$Browser.isPhone}<br></br>
+    {!$Browser.isAndroid}<br></br>
+    {!$Browser.formFactor}<br></br>
+    
+    {!$Locale.language}<br></br>
+    {!$Locale.timezone}<br></br>
+    {!$Locale.numberFormat}<br></br>
+    {!$Locale.currencyFormat}<br></br>
+	
+    <lightning:select name="selectItem" label="Select an item" onchange="{!c.doSomething}">
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+    </lightning:select>
+
+</aura:component>

@@ -1,0 +1,92 @@
+<apex:page tabstyle="Account" controller="nestedqueryexample" showheader="false">
+<!--
+<script>
+        function switchMenu(obj,obj1,obj2) 
+        {
+            var el = document.getElementById(obj);                                       
+            if ( el.style.display != 'none' ) {
+            el.style.display = 'none';
+            }
+            else {
+            el.style.display = '';
+            }
+            var e2 = document.getElementById(obj1);                                       
+            if ( e2.style.display != 'none' ) {
+            e2.style.display = 'none';
+            }
+            else {
+            e2.style.display = '';
+            }
+             var e3 = document.getElementById(obj2);                                       
+            if ( e2.style.display != 'none' ) {
+            e3.style.display = 'none';
+            }
+            else {
+            e3.style.display = '';
+            }
+
+        }
+     function contactcall(accid){     
+     var accountid = accid;    
+      
+            
+     }  
+       
+</script>
+<style>
+.headerRow .TableTitle {
+    background-color: #486D8B !important;
+    background-image: none !important; //This is needed if you want to overwrite the header background
+    color:  #483D8B !important; 
+    font-size:100% !important; 
+  }
+  
+  
+</style>
+<apex:form >
+<apex:actionFunction name="callcon" action="{!acccon}">
+<apex:param name="accountsid" value="" assignTo="{!acontid}"/>    
+</apex:actionFunction> 
+    <apex:pageblock >     
+        <apex:pageblocktable value="{!accsandtmember}"  var="accdet"  CELLSPACING="0" CELLPADDING="0" >
+            <apex:column style="width:1%" headerClass="TableTitle">
+                   <apex:facet name="header">                                        
+                         Team Members                                                                               
+                    </apex:facet>
+                    <apex:outputpanel id="plusimage">
+                          <apex:image url="{!$Resource.Plus_Image}" onclick="switchMenu('{!$Component.inlinetablesec}','{!$Component.minusimage}','{!$Component.plusimage}'); contactcall('{!accdet.id}');" title="Expand - Team Member's"/> 
+                    </apex:outputpanel>
+                    <apex:outputpanel id="minusimage" style="display:none;">
+                          <apex:image url="{!$Resource.Minus_Image}" onclick="switchMenu('{!$Component.inlinetablesec}','{!$Component.plusimage}','{!$Component.minusimage}')" title="Collapse - Team Member's"/>
+                    </apex:outputpanel>
+                    </apex:column>
+                    <apex:column headervalue="Account Name" headerClass="TableTitle">
+                    <apex:outputtext value="{!accdet.Name}"/>
+            </apex:column>
+            <apex:column headervalue="Billing Country" headerClass="TableTitle">
+                    <apex:outputtext value="{!accdet.BillingCountry}"/>
+            </apex:column>
+            
+            <apex:column breakBefore="true" colspan="3" style="border:12px;" >
+                    <apex:outputpanel id="inlinetablesec" style="display:none;">
+                                                <apex:variable value="{!0}" var="rowNum"/>
+                                                <apex:repeat var="count" value="{!accdet.contacts}">
+                                                    <apex:variable var="rowNum" value="{!rowNum+1}"/>
+                                                </apex:repeat>
+                            <apex:outputText rendered="{!rowNum=0}">  No Contacts </apex:outputText>
+                        <apex:pageblocktable value="{!accdet.contacts}" var="tm" rendered="{!rowNum>0}" cellpadding="10%" cellspacing="10%" rowClasses="odd,even" CELLSPACING="1" CELLPADDING="0"   >
+                            <apex:column headerValue="Team Member"  style="color:#486D8B;" headerClass="TableTitle">
+                                   <apex:outputfield value="{!tm.Name}"/>
+                             </apex:column>
+                             <apex:column headerValue="id" headerClass="TableTitle">
+                                   <apex:outputfield value="{!tm.id}" />
+                             </apex:column>                          
+                        </apex:pageblocktable>
+                   </apex:outputpanel>     
+            </apex:column>
+            
+        </apex:pageblocktable>
+    </apex:pageblock>
+    </apex:form>
+    -->
+</apex:page>

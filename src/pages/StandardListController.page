@@ -1,0 +1,24 @@
+<apex:page standardController="Case" recordSetVar="cases" extensions="StandardListControllerExt">
+    <apex:form >
+        <apex:pageBlock Title="StandardListController page" id="pb1">
+            <apex:pageBlockTable value="{!cases}" var="cs">
+                <apex:column headerValue="Case Number" >
+                    <apex:outputLink value="{!cs.Id}">
+                       {!cs.CaseNumber}
+                    </apex:outputLink>
+                </apex:column>                
+                <apex:column value="{!cs.Status}" />
+                <apex:column value="{!cs.Type}" />
+                <apex:column value="{!cs.ClosedDate}" />
+            </apex:pageBlockTable>
+            <center>
+                <apex:PanelGrid columns="4" >
+                    <apex:commandButton value="First" action="{!first}" disabled="{!!hasPrevious}" reRender="pb1"/>
+                    <apex:commandButton value="Previous" action="{!previous}" disabled="{!!hasPrevious}" reRender="pb1"/>
+                    <apex:commandButton value="Next" action="{!next}" disabled="{!!hasNext}" reRender="pb1"/>
+                    <apex:commandButton value="Last" action="{!last}" disabled="{!!hasNext}" reRender="pb1"/>
+                </apex:PanelGrid>
+            </center>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

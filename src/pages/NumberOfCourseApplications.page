@@ -1,0 +1,3 @@
+<apex:page standardController="Course__c" extensions="NumberOfCourseApplicationsExt">
+  <apex:outputText value="{!numOfCourseApplications}"/>
+</apex:page>

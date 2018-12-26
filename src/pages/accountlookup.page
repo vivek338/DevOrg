@@ -1,0 +1,5 @@
+<apex:page controller="Lookup" >
+<apex:form >
+ <apex:outputLabel >Account </apex:outputLabel>    <apex:inputField value="{!t.id}"/>
+  </apex:form>
+</apex:page>

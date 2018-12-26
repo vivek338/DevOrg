@@ -1,0 +1,9 @@
+<aura:component >
+    <aura:attribute name="first" type="string" default="john"/>
+    <aura:attribute name="last" type="string" default="smith"/>
+    <ui:inputText label="First Name" value="{!v.first}" updateon="keyup" />
+    <ui:inputText label="Last Name" value="{!v.last}" updateon="keyup" />
+    
+    <br></br>
+    <ui:outputText value="{!v.first + ''+ v.last}" />
+</aura:component>

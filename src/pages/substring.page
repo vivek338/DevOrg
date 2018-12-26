@@ -1,0 +1,4 @@
+<apex:page >
+<apex:outputText value="GoodMorning"></apex:outputText><br/>
+<apex:outputText value="{!left('GoodMorning',7)}"></apex:outputText>
+</apex:page>

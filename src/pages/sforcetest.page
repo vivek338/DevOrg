@@ -1,0 +1,16 @@
+<apex:page >
+<script>
+    function MyApp() {
+        this.createAccount = function() {
+            sforce.one.navigateToURL("/001/e");
+        };
+    } 
+
+    var app = new MyApp();
+
+    function btnCreateAccount() {
+        app.createAccount();
+    }
+</script>
+  <input type="button" value="Create Account" onclick="btnCreateAccount()" id="btnCreateAcct"/>
+</apex:page>

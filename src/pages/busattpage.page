@@ -1,0 +1,12 @@
+<apex:page standardController="busattachment__c" extensions="busExtension" sidebar="false" showHeader="false" action="{!updatebus}">
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Files in Attachments - Click on it to view </h1>
+  
+  <apex:repeat value="{!attachments}" var="att">
+    <apex:outputPanel rendered="true">
+        <br/>
+        <apex:outputLink value="/{!att.ContentDocumentId}" target="_blank">{!att.ContentDocumentId}</apex:outputLink>
+    </apex:outputPanel>    
+  </apex:repeat> 
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

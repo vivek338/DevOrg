@@ -1,0 +1,39 @@
+<apex:page sidebar="false" showHeader="false" standardController="Registration__c" extensions="loginRegExt">
+    <apex:pageMessages />
+    <apex:form >    
+        <apex:pageBlock title="Login Registration" mode="edit" >
+            <apex:pageBlockSection >
+                    <apex:pageBlockSectionItem >
+                        <apex:image value="{!$Resource.emplyee}" width="400" height="200" />
+                    </apex:pageBlockSectionItem>
+                <apex:pageBlockSection title="Please Register" collapsible="false" columns="1">                 
+                    <apex:repeat value="{!$ObjectType.Registration__c.FieldSets.Regfields}" var="fld">                         
+                        <apex:inputField value="{!Registration__c[fld]}"/>
+                    </apex:repeat>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$ObjectType.Registration__c.Fields.Password123__c.label}"/>
+                         <apex:outputPanel >
+                            <div class="requiredInput">
+                                <div class="requiredBlock"></div>
+                                <apex:inputSecret value="{!Registration__c.Password123__c}" required="true" />
+                            </div>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.confirmpassword}"/>
+                         <apex:outputPanel >
+                            <div class="requiredInput">
+                                <div class="requiredBlock"></div>
+                                <apex:inputSecret value="{!confirmpassword}" />
+                            </div>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:panelGrid columns="3" style="margin-left:10%">
+                        <apex:commandButton value="Submit" action="{!save}" />
+                        <apex:commandButton value="Cancel"  action="{!cancel}"/>
+                    </apex:panelGrid>                       
+                </apex:pageBlockSection>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

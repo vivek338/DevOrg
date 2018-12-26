@@ -1,0 +1,39 @@
+<apex:page controller="nestedtabcon">
+<apex:form >
+<apex:pageBlock title="accounts">
+<apex:pageblocksection title="Accounts INformation" showheader="true" collapsible="true" columns="1">
+
+    <apex:pageBlockTable value="{!accounts}" var="a">
+        <apex:column headerValue="Action">
+            
+
+<!--<apex:commandLink value="Delete" onClick="if (confirmDelete())"/> -->
+<apex:outputLink value="/setup/own/deleteredirect.jsp" onClick="if (confirmDelete())">Del
+     
+     <apex:param name="delID" value="{!a.Id}"/>
+     <apex:param name="retURL" value="/001"/>
+</apex:outputLink>
+
+
+
+
+        </apex:column>
+        <apex:column value="{!a.Name}"/>
+        <apex:column value="{!a.industry}"/>
+
+        <apex:column breakBefore="true" colspan="2" >
+            <apex:pageblocksection title="Contacts Information" showheader="true" collapsible="true" columns="1">
+                <apex:pageBlockTable value="{!a.contacts}" var="c">
+                    <apex:column value="{!c.Id}"/>
+                    <apex:column value="{!c.Name}"/>                    
+                </apex:pageBlockTable>
+            </apex:pageblockSection>
+        </apex:column>
+        
+    </apex:pageBlockTable>
+    
+
+</apex:pageblockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

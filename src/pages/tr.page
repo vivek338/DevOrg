@@ -1,0 +1,14 @@
+<apex:page standardController="countryISTcode__c" recordSetVar="CSObj"> 
+<apex:pageBlock > 
+<apex:pageBlockTable value="{!CSObj}" var="a"> 
+<apex:column value="{!a.Country__c  }"/> 
+
+</apex:pageBlockTable> 
+<apex:pageBlockSection >
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="{!$Api.Session_ID}" />
+
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+</apex:pageBlock> 
+</apex:page>

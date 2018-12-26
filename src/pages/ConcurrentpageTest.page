@@ -1,0 +1,28 @@
+<apex:page controller="ContinuationCalloutPageController">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+     <script>
+         var $ = jQuery.noConflict();
+         function submitClick() {
+             $('input[id*=submitBtn]').attr('value','Submitted...');
+             $('input[id*=submitBtn]').attr('class', 'btnDisabled');
+             return true;
+         }
+         function submitComplete(){
+             $('input[id*=submitBtn]').attr('value','Submit');
+             $('input[id*=submitBtn]').attr('class', 'btn');
+             return true;
+         }
+     </script>
+     <apex:outputPanel id="wholePanel">
+         <apex:messages id="results"/>
+         <apex:form >
+             <apex:pageBlock title="Continuation Callout Page">
+                 <p>
+                     Enter the duration of the service call:
+                 </p>
+                 <apex:inputText id="duration" value="{!duration}"/>
+                 <apex:commandButton id="submitBtn" action="{!submit}" value="Submit" title="Submit" reRender="wholePanel" onClick="submitClick()" onComplete="submitComplete()"/>
+             </apex:pageBlock>
+         </apex:form>
+     </apex:outputPanel>
+ </apex:page>

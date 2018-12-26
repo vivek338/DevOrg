@@ -1,0 +1,85 @@
+<aura:component controller="FolderTree">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}" alternativeText="loading.."/> 
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}" alternativeText="loading ifnshed"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="spinner" type="boolean" default="false" />
+    <aura:attribute name="isFolderSelected" type="boolean" default="false" />
+    <aura:attribute name="items" type="Object"/>
+    <aura:attribute name="parentObj" type="String" />   
+    <aura:attribute name="parentObjNameField" type="String" />
+    <aura:attribute name="newFolder" type="Folder__c" default="{ 'sobjectType': 'Folder__c', 
+                                                                                 'Name': '',
+                                                                               }"/>
+     <aura:attribute name="selectedFolderId" type="String" />   
+    <aura:handler event="c:folderReferesh" action="{!c.doInit}"/>
+    <aura:registerEvent name="FilesRefresh" type="c:FilesInFolderRefresh"/>
+      <aura:if isTrue="{!v.isFolderSelected}">
+     <lightning:button variant="brand" label="Edit" onclick="{! c.openModel}" iconName="utility:edit"/>
+      <lightning:button iconName="utility:close" label="Delete" onclick="{!c.deletefolder}" /> <br/>
+    </aura:if>  
+     <div class="slds-tree_container" role="application" style="margin:15px">
+         <b> Folders For User </b><br/><br/>
+    <aura:iteration var="r" items="{!v.items}" >
+          <div class="slds-tree">
+              
+    <!--    <lightning:button iconName="utility:edit" label="" onclick="{!c.openModel}" value="{!r.Id}"/> <br/>
+        <lightning:button iconName="utility:close" label="" onclick="{!c.deletefolder}" value="{!r.Id}"/> <br/>
+        <div onClick="{!c.openModel}" value="{!r.Id}">
+		 <lightning:buttonIcon iconName="utility:edit" variant="bare" onclick="{! c.openModel }" alternativeText="Edit Folder." />              
+             </div>
+		 <lightning:buttonIcon iconName="utility:close" variant="bare" onclick="{! c.handleClick }" alternativeText="Delete Folder." />&nbsp;&nbsp;-->
+        <!--<lightning:icon iconName="standard:folder" size="small" title="abc" alternativeText="Indicates approval" variant="error" />-->
+          <lightning:button iconName="standard:folder" label="{!r.label}" onclick="{!c.selctedFolder}" value="{!r.Id}"/> <br/>
+          
+        <!--{!r.label}--> 
+           
+              <!--<ui:outputText value="{!r.label}">  </ui:outputText>-->
+     <!--    <span class="slds-size_1-of-1">
+         	<span class="slds-tree__item-label slds-truncate" title="Tree Branch"  onclick="alert('hi');">{!r.label}</span>
+        </span> --> 
+        </div>
+    </aura:iteration> 
+    </div>                     
+    <!--<lightning:tree items="{! v.items }" header="{! v.parentObj }"/> -->
+    <aura:if isTrue="{!v.spinner}" >
+        <lightning:spinner aura:id="spinnerId" />
+    </aura:if>   
+         
+   <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:if isTrue="{!v.isOpen}">
+    <!--//MOdal box-->
+    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+        <div class="slds-modal__container">
+          <!-- ###### MODAL BOX HEADER Part Start From Here ######-->
+          <div class="slds-modal__header">
+            <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModel}">
+            X
+            <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="header99" class="slds-text-heading--medium">Edit a New Folder</h2>
+          </div>
+          <!--###### MODAL BOX BODY Part Start From Here ######-->
+          <div class="slds-modal__content slds-p-around--medium">
+              <form>
+                  <ui:inputText aura:id="FolderName" label="Edit Folder Name"
+                                class="slds-input"
+                                labelClass="slds-form-element__label"
+                                value="{!v.newFolder.Name}"
+                                required="true"/>                  
+              </form>
+         <!--   <lightning:input aura:id="field" label="Folder Name" placeholder="Enter Folder Name Here.." required="true" />                   
+              <ui:inputCheckbox label="is Generic ?  "/>-->
+          </div>
+          <!--###### MODAL BOX FOOTER Part Start From Here ######-->
+          <div class="slds-modal__footer">
+            <button class="slds-button slds-button--neutral" onclick="{!c.closeModel}" >Cancel</button>
+            <button class="slds-button slds-button--brand" onclick="{!c.likenClose}">Save</button>
+          </div>
+        </div>
+      </div>
+      <div class="slds-backdrop slds-backdrop--open"></div>
+      <!--###### MODAL BOX Part END Here ######-->
+        </aura:if>
+    <c:FilesInFolder folderRecordId="{!selectedFolderId}"/>   
+</aura:component>

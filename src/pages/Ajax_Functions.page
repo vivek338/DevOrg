@@ -1,0 +1,28 @@
+<apex:page controller="AjaxFunctionsContrl">
+    <apex:outputPanel >
+        <apex:outputLabel value="Welcome to Ajax Funcitons Demo" style="{!styleInfo}" onmouseover="turnColor();" />
+    </apex:outputPanel>
+<apex:form >
+  <apex:pageBlock title="Ajax Functions Demo" mode="edit">
+      <apex:pageBlockSection title="Country Selection">   
+          <apex:pageBlockSectionItem >
+              <apex:outputLabel value="Country" />
+                  <apex:selectList size="1" value="{!selVal}">
+                   <apex:actionStatus id="conStat">
+                       <apex:facet name="start">
+                       <apex:image value="/img/loading32.gif" width="20px"/>
+                      
+                    </apex:facet>
+                    </apex:actionStatus> 
+                   <apex:selectOptions value="{!options}"/>   
+                  </apex:selectList>
+                  
+          </apex:pageBlockSectionItem>   
+      </apex:pageBlockSection>
+      <apex:pageBlockSection title="{!selVal} info" id="conSection">      
+      </apex:pageBlockSection>
+      <apex:pageBlockSection title="Country Selection">      
+      </apex:pageBlockSection>
+  </apex:pageBlock>
+</apex:form>
+</apex:page>

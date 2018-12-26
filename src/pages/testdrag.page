@@ -1,0 +1,27 @@
+<apex:page controller="DragDrop">
+  <script>
+    var dragStartId;
+    function cancel(event) {
+      event.preventDefault();
+    }
+    function dragstart(event) {
+      dragStartId = event.target.dataset.rowid;
+    }
+    function drop(event) {
+      reorderitems(dragStartId, event.target.dataset.rowid);
+    }
+  </script>
+  <apex:form id="form">
+    <apex:actionFunction name="reorderitems" reRender="form" action="{!reorder}">
+      <apex:param name="dragStart" assignTo="{!dragStartId}" value="" />
+      <apex:param name="dragEnd" assignTo="{!dragEndId}" value="" />
+    </apex:actionFunction>
+    <div ondragover="cancel(event)" ondragenter="cancel(event)" ondrop="drop(event)">
+    <apex:repeat value="{!items}" var="item">
+      <div data-rowid="{!item.index}" draggable="true" ondragstart="dragstart(event)" >
+        {!item.Name}
+      </div>
+    </apex:repeat>
+    </div>
+  </apex:form>
+</apex:page>

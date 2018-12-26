@@ -1,0 +1,18 @@
+<apex:page controller="accountcontrol" standardstylesheets="True" action="{!concontrl}">
+ <style>
+  .headerRow .TableTitle {
+   
+    background-image: none !important; //This is needed if you want to overwrite the header background
+    color:  #483D8B !important; 
+    font-size:100% !important; 
+  }
+ </style>
+ <apex:pageBlock >
+  <apex:pageBlockSection >
+   <apex:pageBlockTable value="{!Accounts}" var="Account" CELLSPACING="0" >
+    <apex:column headerValue="ID" headerClass="TableTitle" value="{!Account.ID}" />
+    <apex:column headerValue="Name" headerClass="TableTitle" value="{!Account.Name}" />
+   </apex:pageBlockTable>
+  </apex:pageBlockSection>
+ </apex:pageBlock>
+</apex:page>

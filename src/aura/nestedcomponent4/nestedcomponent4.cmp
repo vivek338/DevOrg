@@ -1,0 +1,9 @@
+<aura:component controller="OpportunityController" >
+    <aura:attribute name="opportunities" type="List"/>
+    <ui:button label="call me" press="{!c.getOpps}"/>
+    <aura:iteration var="opp" items="{!v.opportunities}">
+    	<p> {!opp.Name +'**** '+opp.Amount} </p> 
+        
+    </aura:iteration>
+    
+</aura:component>

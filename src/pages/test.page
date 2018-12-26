@@ -1,0 +1,5 @@
+<apex:page controller="testpage" action="{!dotestpage}" >
+  
+  This is page just redirects to another page.
+  
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:page standardController="Opportunity" >
+  <apex:outputText > {!Opportunity.id}</apex:outputText>
+  <apex:outputText > {!Opportunity.Accountid}</apex:outputText>
+  <apex:outputText > {!Opportunity.Account.Name}</apex:outputText>
+  
+</apex:page>
